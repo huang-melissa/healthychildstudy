@@ -326,7 +326,7 @@ master_r <- master_r %>%
   ### Pathologic subscale: (3, 5, 8, 11, 14, 16, 19, 22)
   ### Total: sum of all 3
 
-   <- master_r %>%
+   master_r <- master_r %>%
     rowwise() %>%
     mutate(EGO_SQ = mean(c(SQ2, SQ6, SQ10, SQ13, SQ15, SQ18, SQ21, SQ23), na.rm=TRUE)*8) %>%
     mutate(ADAPT_SQ = mean(c(SQ1, SQ4, SQ7, SQ9, SQ12, SQ17, SQ20, SQ24), na.rm=TRUE)*8) %>%
