@@ -326,7 +326,7 @@ master_r <- master_r %>%
   ### Pathologic subscale: (3, 5, 8, 11, 14, 16, 19, 22)
   ### Total: sum of all 3
 
-  selfish_data <- selfish_data %>%
+   <- master_r %>%
     rowwise() %>%
     mutate(EGO_SQ = mean(c(SQ2, SQ6, SQ10, SQ13, SQ15, SQ18, SQ21, SQ23), na.rm=TRUE)*8) %>%
     mutate(ADAPT_SQ = mean(c(SQ1, SQ4, SQ7, SQ9, SQ12, SQ17, SQ20, SQ24), na.rm=TRUE)*8) %>%
@@ -341,7 +341,7 @@ master_r <- master_r %>%
   #### Summate  to form proactive and reactive scales
   #### Both Proactive and reactive scale scores are summated to obtain total aggression scores. Raine et al., 2006
 
-  selfish_data <- selfish_data %>%
+  master_r <- master_r %>%
     rowwise() %>%
     mutate(PA3 = mean(c(RPQ2,RPQ4,RPQ6,RPQ9,RPQ10,RPQ12,RPQ15,RPQ17,RPQ18,RPQ20,RPQ21,RPQ23), na.rm=TRUE)*12) %>%
     mutate(RA3 = mean(c(RPQ1,RPQ3,RPQ5,RPQ7,RPQ8,RPQ11,RPQ13,RPQ14,RPQ16,RPQ19,RPQ22), na.rm=TRUE)*11) %>%
@@ -365,7 +365,7 @@ master_r <- master_r %>%
   #### Higher scores in the negative scales indicate inefficient practices
   #### Other Discipline Practices is not a scale, but provides information on an item by item basis
 
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(APQ_INV = mean(c(APQ1, APQ4, APQ7, APQ9, APQ11, APQ14, APQ15, APQ20, APQ23, APQ26), na.rm=TRUE)*10) %>%
       mutate(APQ_PP = mean(c(APQ2, APQ5, APQ13, APQ16, APQ18, APQ27), na.rm=TRUE)*6) %>%
@@ -388,14 +388,14 @@ master_r <- master_r %>%
   ### Del: CBCL26 CBCL39 CBCL43 CBCL63 CBCL67 CBCL72 CBCL81 CBCL82 CBCL90 CBCL96 CBCL101 CBCL105 CBCL106 (13 items)
 
   #profile cbcl scores
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(CBC_AGG = mean(c(CBC3, CBC16, CBC19, CBC20, CBC21, CBC22, CBC23, CBC37, CBC57, CBC68, CBC86, CBC87, CBC88, CBC89, CBC94, CBC95, CBC97, CBC104), na.rm=TRUE)*18) %>%
       mutate(CBC_DEL = mean(c(CBC2, CBC26, CBC28, CBC39, CBC43, CBC63, CBC67, CBC72, CBC73, CBC81, CBC82, CBC90, CBC96, CBC99, CBC101, CBC105, CBC106), na.rm=TRUE)*17) %>%
       mutate(CBC_EXTER = sum(CBC_AGG, CBC_DEL, na.rm=TRUE))
 
   #fast track cbcl scores
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(CBC_AGG_FT = mean(c(CBC3,CBC7,CBC16,CBC19,CBC20,CBC21,CBC22,CBC23,CBC27,CBC37,CBC57, CBC68,CBC74,CBC86,CBC87,CBC93,CBC94,CBC95,CBC97,CBC104), na.rm=TRUE)*20) %>%
       mutate(CBC_DEL_FT = mean(c(CBC26,CBC39,CBC43,CBC63,CBC67,CBC72,CBC81,CBC82,CBC90,CBC96, CBC101,CBC105,CBC106), na.rm=TRUE)*13) %>%
@@ -418,21 +418,21 @@ master_r <- master_r %>%
 
   #CAREGIVER VERSION
   #reverse code
-  selfish_data$P_ICU1r <- car::recode(selfish_data$P_ICU1, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU3r <- car::recode(selfish_data$P_ICU3, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU5r <- car::recode(selfish_data$P_ICU5, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU8r <- car::recode(selfish_data$P_ICU8, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU13r <- car::recode(selfish_data$P_ICU13, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU14r <- car::recode(selfish_data$P_ICU14, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU15r <- car::recode(selfish_data$P_ICU15, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU16r <- car::recode(selfish_data$P_ICU16, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU17r <- car::recode(selfish_data$P_ICU17, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU19r <- car::recode(selfish_data$P_ICU19, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU23r <- car::recode(selfish_data$P_ICU23, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$P_ICU24r <- car::recode(selfish_data$P_ICU24, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU1r <- car::recode(master_r$P_ICU1, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU3r <- car::recode(master_r$P_ICU3, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU5r <- car::recode(master_r$P_ICU5, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU8r <- car::recode(master_r$P_ICU8, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU13r <- car::recode(master_r$P_ICU13, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU14r <- car::recode(master_r$P_ICU14, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU15r <- car::recode(master_r$P_ICU15, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU16r <- car::recode(master_r$P_ICU16, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU17r <- car::recode(master_r$P_ICU17, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU19r <- car::recode(master_r$P_ICU19, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU23r <- car::recode(master_r$P_ICU23, "0=3; 1=2; 2=1; 3=0")
+  master_r$P_ICU24r <- car::recode(master_r$P_ICU24, "0=3; 1=2; 2=1; 3=0")
 
   #original
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(pICU_CA = mean(c(P_ICU4,P_ICU8r,P_ICU9,P_ICU18,P_ICU11,P_ICU21,P_ICU7,P_ICU20,P_ICU2,P_ICU10,P_ICU12), na.rm=TRUE)*11) %>%
       mutate(pICU_UC = mean(c(P_ICU15r,P_ICU23r,P_ICU16r,P_ICU3r,P_ICU17r,P_ICU24r,P_ICU13r,P_ICU5r), na.rm=TRUE)*8) %>%
@@ -440,7 +440,7 @@ master_r <- master_r %>%
       mutate(pICU = sum(pICU_CA,pICU_UC,pICU_UE, na.rm=TRUE))
 
   #new factor
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(pICU_CA_newf = mean(c(P_ICU4,P_ICU7,P_ICU9,P_ICU11,P_ICU12,P_ICU18,P_ICU20), na.rm=TRUE)*7) %>%
       mutate(pICU_UC_newf = mean(c(P_ICU3r,P_ICU5r,P_ICU13r,P_ICU15r,P_ICU16r,P_ICU17r,P_ICU23r,P_ICU24r), na.rm=TRUE)*8) %>%
@@ -450,21 +450,21 @@ master_r <- master_r %>%
 
   #SELF-REPORT (YOUTH) VERSION
   #reverse code
-  selfish_data$ICU1r <- car::recode(selfish_data$ICU1, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU3r <- car::recode(selfish_data$ICU3, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU5r <- car::recode(selfish_data$ICU5, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU8r <- car::recode(selfish_data$ICU8, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU13r <- car::recode(selfish_data$ICU13, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU14r <- car::recode(selfish_data$ICU14, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU15r <- car::recode(selfish_data$ICU15, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU16r <- car::recode(selfish_data$ICU16, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU17r <- car::recode(selfish_data$ICU17, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU19r <- car::recode(selfish_data$ICU19, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU23r <- car::recode(selfish_data$ICU23, "0=3; 1=2; 2=1; 3=0")
-  selfish_data$ICU24r <- car::recode(selfish_data$ICU24, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU1r <- car::recode(master_r$ICU1, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU3r <- car::recode(master_r$ICU3, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU5r <- car::recode(master_r$ICU5, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU8r <- car::recode(master_r$ICU8, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU13r <- car::recode(master_r$ICU13, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU14r <- car::recode(master_r$ICU14, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU15r <- car::recode(master_r$ICU15, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU16r <- car::recode(master_r$ICU16, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU17r <- car::recode(master_r$ICU17, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU19r <- car::recode(master_r$ICU19, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU23r <- car::recode(master_r$ICU23, "0=3; 1=2; 2=1; 3=0")
+  master_r$ICU24r <- car::recode(master_r$ICU24, "0=3; 1=2; 2=1; 3=0")
 
   #original
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(ICU_CA = mean(c(ICU4,ICU8r,ICU9,ICU18,ICU11,ICU21,ICU7,ICU20,ICU2,ICU10,ICU12), na.rm=TRUE)*11) %>%
       mutate(ICU_UC = mean(c(ICU15r,ICU23r,ICU16r,ICU3r,ICU17r,ICU24r,ICU13r,ICU5r), na.rm=TRUE)*8) %>%
@@ -472,7 +472,7 @@ master_r <- master_r %>%
       mutate(ICU = sum(ICU_CA,ICU_UC,ICU_UE, na.rm=TRUE))
 
   #new factor
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(ICU_CA_newf = mean(c(ICU4,ICU7,ICU9,ICU11,ICU12,ICU18,ICU20), na.rm=TRUE)*7) %>%
       mutate(ICU_UC_newf = mean(c(ICU3r,ICU5r,ICU13r,ICU15r,ICU16r,ICU17r,ICU23r,ICU24r), na.rm=TRUE)*8) %>%
@@ -486,13 +486,13 @@ master_r <- master_r %>%
   ### Impulsivity: 1, 3, 7, 10, 14 (5 items)
 
   #CAREGIVER VERSION
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(pAPSD_NARC = mean(c(P_APSD4,P_APSD6,P_APSD8,P_APSD9,P_APSD11,P_APSD12,P_APSD13), na.rm=TRUE)*7) %>%
       mutate(pAPSD_IMP = mean(c(P_APSD1,P_APSD3,P_APSD7,P_APSD10,P_APSD14), na.rm=TRUE)*5)
 
   #SELF-RERPORT (YOUTH) VERSION
-  selfish_data <-selfish_data %>%
+  master_r <-master_r %>%
     rowwise() %>%
       mutate(APSD_NARC = mean(c(APSD4,APSD6,APSD8,APSD9,APSD11,APSD12,APSD13), na.rm=TRUE)*7) %>%
       mutate(APSD_IMP = mean(c(APSD1,APSD3,APSD7,APSD10,APSD14), na.rm=TRUE)*5)
