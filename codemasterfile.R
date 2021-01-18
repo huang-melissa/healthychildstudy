@@ -230,7 +230,7 @@ master_r <-master_r %>%
   mutate(NRIRQV_DIS_tot = sum(NRIRQV_PRS_tot,NRIRQV_CON_tot,NRIRQV_CRIT_tot,NRIRQV_DOM_tot, NRIRQV_EX_tot, na.rm=TRUE))
 
 
-## Social Adversity
+## Social Adversity (See Zhang & Gao, 2015)
 
 #### Social adversity SYNTAX FOR WAVE 3
 #### Includes the following: Divorced/single parents, teenage mother, mental health of mom, mental health of dad,
@@ -449,7 +449,6 @@ master_r <- master_r %>%
 
 
   #SELF-REPORT (YOUTH) VERSION
-  #CAREGIVER VERSION
   #reverse code
   selfish_data$ICU1r <- car::recode(selfish_data$ICU1, "0=3; 1=2; 2=1; 3=0")
   selfish_data$ICU3r <- car::recode(selfish_data$ICU3, "0=3; 1=2; 2=1; 3=0")
