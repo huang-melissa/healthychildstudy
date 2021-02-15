@@ -492,8 +492,52 @@ master_r <- master_r %>%
       mutate(pAPSD_NARC = mean(c(P_APSD4,P_APSD6,P_APSD8,P_APSD9,P_APSD11,P_APSD12,P_APSD13), na.rm=TRUE)*7) %>%
       mutate(pAPSD_IMP = mean(c(P_APSD1,P_APSD3,P_APSD7,P_APSD10,P_APSD14), na.rm=TRUE)*5)
 
-  #SELF-RERPORT (YOUTH) VERSION
+  #SELF-REPORT (YOUTH) VERSION
   master_r <-master_r %>%
     rowwise() %>%
       mutate(APSD_NARC = mean(c(APSD4,APSD6,APSD8,APSD9,APSD11,APSD12,APSD13), na.rm=TRUE)*7) %>%
       mutate(APSD_IMP = mean(c(APSD1,APSD3,APSD7,APSD10,APSD14), na.rm=TRUE)*5)
+
+
+
+## CASES (Cognitive, Affective, & Somatic Empathy Scale); Raine & Chen, 2018; 30 items (scale: 0 to 2)
+
+  # this script creates a standalone dataframe, with each CASES item plus the total and three subscores,
+  # that can be joined to any other dataframe on the "FUV3ID" column
+      # e.g., your_df <- your_df %>% left_join(data_CASES, by = "FUV3ID")
+
+  data_CASES <- master %>%
+    select(CASES1:CASES30, FUV3ID) %>%
+    mutate_all(unclass)
+
+  # indices for total (tot) and subscores (cog, aff, som)
+  tot_emp_ind <- c(1:30)
+  cog_emp_ind <- c(1,6,9,12,17,18,21,23,26,28)
+  aff_emp_ind <- c(2,5,8,10,13,16,19,22,25,27)
+  som_emp_ind <- c(3,4,7,11,14,15,20,24,29,30)
+
+  data_CASES$total_empathy <- rowSums(data_CASES[,tot_emp_ind])
+  data_CASES$cog_empathy <- rowSums(data_CASES[,cog_emp_ind])
+  data_CASES$aff_empathy <- rowSums(data_CASES[,aff_emp_ind])
+  data_CASES$som_empathy <- rowSums(data_CASES[,som_emp_ind])
+
+
+
+## Reactive & Proactive Aggression Questionnaire (RPQ); 23 items (scale: 0 to 2)
+
+  # this script creates a standalone dataframe, with each RPQ item plus the total and two subscores,
+  # that can be joined to any other dataframe on the "FUV3ID" column
+      # e.g., your_df <- your_df %>% left_join(data_RPQ, by = "FUV3ID")
+
+  data_RPQ <- master %>%
+    select(RPQ1:RPQ23, FUV3ID) %>%
+    mutate_all(unclass)
+
+  # indices for total aggression and reactive + proactive aggression subscores
+  tot_aggr_ind <- c(1:23)
+  pro_aggr_ind <- c(2, 4, 6, 9, 10, 12, 15, 17, 18, 20, 21, 23)
+  reac_aggr_ind <- c(1, 3, 5, 7, 8, 11, 13, 14, 16, 19, 22)
+
+  data_RPQ$tot_aggr <- rowSums(data_RPQ[,tot_aggr_ind])
+  data_RPQ$pro_aggr <- rowSums(data_RPQ[,pro_aggr_ind])
+  data_RPQ$reac_aggr <- rowSums(data_RPQ[,reac_aggr_ind])
